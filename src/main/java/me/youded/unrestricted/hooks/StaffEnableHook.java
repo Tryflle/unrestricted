@@ -1,6 +1,6 @@
 package me.youded.unrestricted.hooks;
 
-import net.weavemc.loader.api.Hook;
+import net.weavemc.api.Hook;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public class StaffEnableHook extends Hook {
         for (MethodNode method : classNode.methods) {
             if (!(method.access == Opcodes.ACC_PUBLIC && method.desc.endsWith(";FFFFFFZ)V")))
                 continue;
-            
+            System.out.println("Found method [StaffEnableHook]");
             boolean isStaffEnableClass = Arrays.stream(method.instructions.toArray())
                     .filter(MethodInsnNode.class::isInstance)
                     .map(MethodInsnNode.class::cast)

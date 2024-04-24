@@ -1,6 +1,6 @@
 package me.youded.unrestricted.hooks;
 
-import net.weavemc.loader.api.Hook;
+import net.weavemc.api.Hook;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public class TexturePackUnrestrictHook extends Hook {
         for (MethodNode method : classNode.methods) {
             if (!(method.access == Opcodes.ACC_PUBLIC  + Opcodes.ACC_STATIC && method.desc.equals("(Ljava/lang/String;)Z")))
                 continue;
-
+            System.out.println("Found method [TexturePackUnrestrictHook]");
             boolean isTexturePackClass = Arrays.stream(method.instructions.toArray())
                     .filter(LdcInsnNode.class::isInstance)
                     .map(LdcInsnNode.class::cast)

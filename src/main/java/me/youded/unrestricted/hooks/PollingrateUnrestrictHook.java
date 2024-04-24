@@ -1,6 +1,6 @@
 package me.youded.unrestricted.hooks;
 
-import net.weavemc.loader.api.Hook;
+import net.weavemc.api.Hook;
 
 import java.util.Arrays;
 
@@ -13,11 +13,11 @@ import org.objectweb.asm.tree.MethodNode;
 
 public class PollingrateUnrestrictHook extends Hook {
     @Override
-    public void transform(@NotNull ClassNode classNode, @NotNull AssemblerConfig assemblerConfig) {
+    public void transform(@NotNull ClassNode classNode, @NotNull Hook.AssemblerConfig assemblerConfig) {
         for (MethodNode method : classNode.methods) {
             if (!(method.access == Opcodes.ACC_PUBLIC && method.name.equals("start") && method.desc.equals("()V")))
                 continue;
-
+            System.out.println("Found method [PollingrateUnrestrictHook]");
             boolean isPollingrateClass = Arrays.stream(method.instructions.toArray())
                     .filter(LdcInsnNode.class::isInstance)
                     .map(LdcInsnNode.class::cast)

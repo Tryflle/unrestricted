@@ -1,6 +1,7 @@
 package me.youded.unrestricted.hooks;
 
-import net.weavemc.loader.api.Hook;
+
+import net.weavemc.api.Hook;
 
 import java.util.Arrays;
 
@@ -17,7 +18,7 @@ public class BlacklistEnableHook extends Hook {
         for (MethodNode method : classNode.methods) {
             if (!(method.access == Opcodes.ACC_PUBLIC && method.desc.equals("(Lcom/google/gson/JsonElement;)V")))
                 continue;
-
+            System.out.println("Found method [BlacklistEnableHook]");
             boolean isBlackListEnableClass = Arrays.stream(method.instructions.toArray())
                     .filter(LdcInsnNode.class::isInstance)
                     .map(LdcInsnNode.class::cast)

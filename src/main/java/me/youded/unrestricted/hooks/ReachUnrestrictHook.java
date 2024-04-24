@@ -1,6 +1,6 @@
 package me.youded.unrestricted.hooks;
 
-import net.weavemc.loader.api.Hook;
+import net.weavemc.api.Hook;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public class ReachUnrestrictHook extends Hook {
         for (MethodNode method : classNode.methods) {
             if (!(method.access == Opcodes.ACC_PUBLIC && method.desc.equals("()Ljava/lang/String;")))
                 continue;
-
+            System.out.println("Found method [ReachUnrestrictHook]");
             boolean isReachDisplayClass = Arrays.stream(method.instructions.toArray())
                     .filter(LdcInsnNode.class::isInstance)
                     .map(LdcInsnNode.class::cast)
